@@ -191,9 +191,116 @@ const RECIPES = {
         "Goûter la base avant la crème : elle doit sembler trop acide et trop sucrée, la crème arrondit tout.",
         "Service extérieur / Dubaï : 2 g de gélatine réhydratée fondue dans la base chaude. Mousse plus ferme, tenue."
       ]
+    },
+    {
+      id: 'bonbon-agneau',
+      name: "Bonbon d'agneau",
+      subtitle: 'Base — garniture',
+      meta: [],
+      ingredients: [
+        { qty: 'QS', name: "Collier d'agneau" },
+        { qty: 'QS', name: 'Garniture aromatique', note: 'Carotte, oignon, ail' },
+        { qty: 'QS', name: 'Persil plat haché' },
+        { qty: 'PM', name: 'Sel' },
+        { qty: 'PM', name: 'Poivre' }
+      ],
+      steps: [
+        "Cuire les colliers avec la garniture aromatique (carotte, oignon, ail).",
+        "Effilocher.",
+        "Assaisonner avec le jus de cuisson réduit à glace.",
+        "Ajouter le persil plat haché.",
+        "Rectifier sel et poivre."
+      ]
+    },
+    {
+      id: 'pate-a-lhuile',
+      name: "Pâte à l'huile",
+      subtitle: 'Base — pâte',
+      meta: [],
+      ingredients: [
+        { qty: '500 g', name: 'Farine' },
+        { qty: '50 g',  name: "Huile d'olive" },
+        { qty: '1',     name: 'Œuf' },
+        { qty: '160 g', name: 'Eau froide' }
+      ],
+      steps: [
+        "Pétrir légèrement.",
+        "Mettre sous vide."
+      ]
+    },
+    {
+      id: 'siphon-lard-colonnata',
+      name: 'Siphon lard colonnata',
+      subtitle: 'Base — siphon',
+      meta: [],
+      ingredients: [
+        { qty: '500 g', name: 'Lard grillé, taillé en brunoise' },
+        { qty: '1',     name: 'Branche de thym' },
+        { qty: '1',     name: 'Branche de romarin' },
+        { qty: '1',     name: 'Branche de sarriette' },
+        { qty: '10',    name: 'Baies rose' },
+        { qty: '350 g', name: 'Eau' },
+        { qty: '50 g',  name: 'Crème' },
+        { qty: '2 g',   name: 'Xantane' }
+      ],
+      steps: [
+        "Cuisson 45 minutes à <strong>90 °C</strong> (lard, aromates, eau).",
+        "Retirer la garniture.",
+        "Mixer.",
+        "Ajouter la crème et le xantane."
+      ]
     }
   ],
-  entrees: [], plats: [], desserts: [], sauces: [], menus: []
+  entrees: [],
+  plats: [
+    {
+      id: 'foie-gras-landes-tranche-epaisse-rotie',
+      name: 'Foie gras des Landes, tranche épaisse rôtie',
+      subtitle: 'Les Sources de Caudalie — Nicolas Masse',
+      meta: [
+        { label: 'Portions', value: '~120 g / tranche' }
+      ],
+      ingredients: [
+        { qty: 'Selon convives', name: 'Foie gras des Landes' },
+        { qty: 'PM', name: 'Sel' },
+        { qty: 'PM', name: 'Poivre' }
+      ],
+      steps: [
+        "Sortir les foies gras 30 minutes avant de les dénerver.",
+        "Séparer les 2 parties de chaque lobe de foie gras.",
+        "Dénerver chaque lobe sans trop les ouvrir.",
+        "Refermer délicatement chaque lobe en les reconstituants. Assaisonner avec sel et poivre.",
+        "Réserver au frais 30 minutes.",
+        "Mettre sous vide en sac rétractable. Immerger dans l'eau bouillante rapidement et refroidir immédiatement.",
+        "Cuire dans une ambiance de <strong>75 °C</strong> pendant environ 35 minutes, jusqu'à une température à cœur de <strong>50 °C</strong>.",
+        "Sortir du four, laisser reposer 3 minutes à température ambiante, puis plonger dans l'eau froide 5 minutes.",
+        "Poursuivre le refroidissement dans l'eau glacée pendant 20 minutes. Détailler en portions d'environ 120 g. Mettre sous vide individuellement et réserver au frais.",
+        "Finition : remettre en température la portion dans une ambiance de <strong>40 °C</strong>. Retirer la poche sous vide puis colorer dans une poêle chaude, en l'arrosant de graisse. La température à cœur ne doit jamais dépasser 40 °C."
+      ]
+    }
+  ],
+  desserts: [],
+  sauces: [
+    {
+      id: 'jus-de-moule',
+      name: 'Jus de moule',
+      subtitle: 'Sauce',
+      meta: [],
+      ingredients: [
+        { qty: 'QS', name: 'Moules' },
+        { qty: 'QS', name: 'Vin blanc' },
+        { qty: 'QS', name: 'Gingembre' },
+        { qty: 'QS', name: 'Curry' },
+        { qty: '50/50', name: 'Eau (avec le jus de cuisson)' }
+      ],
+      steps: [
+        "Cuire les moules au vin blanc avec gingembre et curry.",
+        "Récupérer uniquement les langues orange.",
+        "Puis cuire à hauteur avec 50/50 jus de cuisson et eau."
+      ]
+    }
+  ],
+  menus: []
 };
 
 const CAT_LABELS = { bases:'Bases', entrees:'Entrées', plats:'Plats', desserts:'Desserts', sauces:'Sauces', menus:'Menus' };
@@ -210,7 +317,7 @@ function renderList(cat) {
     <button class="recipe-card" data-id="${r.id}" data-cat="${cat}">
       <p class="card-eyebrow">${CAT_LABELS[cat]}</p>
       <h3 class="card-name">${r.name}</h3>
-      <p class="card-meta">${r.meta[0].value}</p>
+      <p class="card-meta">${r.meta[0] ? r.meta[0].value : r.subtitle}</p>
       <span class="card-arrow">Voir la recette →</span>
     </button>`).join('');
   main.innerHTML = `<div class="list-header"><p class="list-eyebrow">Recueil Savin</p><div class="gold-rule"></div><h2 class="list-title">${CAT_LABELS[cat]}</h2></div><div class="recipe-grid">${cards}</div>`;
@@ -234,6 +341,7 @@ function renderDetail(r) {
       <span class="meta-label">${m.label}</span>
       <span class="meta-value">${m.value}</span>
     </div>`).join('');
+  const metaStripHtml = r.meta.length ? `<div class="meta-strip">${metaItems}</div>` : '';
   const notesHtml = r.notes && r.notes.length ? `
     <div class="recipe-notes">
       <p class="section-label">Notes</p>
@@ -254,7 +362,7 @@ function renderDetail(r) {
         <div class="gold-rule"></div>
         <p class="sheet-subtitle">${r.subtitle}</p>
       </div>
-      <div class="meta-strip">${metaItems}</div>
+      ${metaStripHtml}
       <div class="recipe-body">
         <div class="ingredients-col"><p class="section-label">Ingrédients</p>${ingRows}</div>
         <div class="steps-col"><p class="section-label">Procédé</p><ol class="steps-list">${steps}</ol></div>
