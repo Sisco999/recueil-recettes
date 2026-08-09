@@ -46,6 +46,15 @@
   .empty-state { text-align: center; padding: 5rem 2rem; color: var(--ink-mid); }
   .empty-state p { font-family: Georgia, serif; font-style: italic; font-size: 1rem; }
 
+  .ref-table-title { text-align: center; font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 1.5rem; }
+  .ref-table-wrap { overflow-x: auto; border: 1px solid var(--divider); }
+  .ref-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  .ref-table th { text-align: left; font-size: 0.625rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600; padding: 0.75rem 1rem; border-bottom: 1px solid var(--divider); white-space: nowrap; }
+  .ref-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--divider); color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .ref-table tbody tr:last-child td { border-bottom: none; }
+  .ref-item { font-weight: 600; color: var(--navy); }
+  .ref-item small { display: block; font-weight: normal; font-style: italic; color: var(--ink-mid); font-size: 0.75rem; white-space: normal; margin-top: 0.2rem; }
+
   .detail-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; }
   .btn-back { background: none; border: 1px solid var(--divider); padding: 0.5rem 1rem; font-family: inherit; font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); cursor: pointer; }
   .btn-back:hover { border-color: var(--navy); color: var(--navy); }
@@ -78,6 +87,7 @@
   .step::before { content: counter(step); font-family: Georgia, serif; font-style: italic; font-size: 0.75rem; color: var(--gold); padding-top: 0.2rem; line-height: 1; }
   .step p { font-size: 0.9375rem; line-height: 1.65; color: var(--ink); }
   .step p strong { color: var(--navy); font-weight: 600; }
+  .steps-missing { font-size: 0.875rem; font-style: italic; color: var(--ink-mid); line-height: 1.6; }
 
   .recipe-notes { margin-top: 2.5rem; padding-top: 1.75rem; border-top: 1px solid var(--divider); display: grid; grid-template-columns: 200px 1fr; gap: 0 3rem; }
   .notes-body { font-size: 0.875rem; color: var(--ink-mid); line-height: 1.7; }
@@ -122,6 +132,7 @@
   <button class="cat-tab" data-cat="desserts">Desserts</button>
   <button class="cat-tab" data-cat="sauces">Sauces</button>
   <button class="cat-tab" data-cat="menus">Menus</button>
+  <button class="cat-tab" data-cat="references">Références</button>
 </nav>
 
 <main class="main" id="main"></main>
@@ -249,6 +260,162 @@ const RECIPES = {
         "Mixer.",
         "Ajouter la crème et le xantane."
       ]
+    },
+    {
+      id: 'sorbet-poivron',
+      name: 'Sorbet Poivron',
+      subtitle: 'Base — sorbet',
+      meta: [],
+      ingredients: [
+        { qty: '1380 g', name: 'Poivron rôti' },
+        { qty: '650 g',  name: 'Glucose' },
+        { qty: '120 g',  name: 'Jus de citron' },
+        { qty: 'PM',     name: 'Piment d\'Espelette' }
+      ],
+      steps: []
+    },
+    {
+      id: 'gnocchi-chataigne',
+      name: 'Gnocchi châtaigne',
+      subtitle: 'Base — pâte',
+      meta: [],
+      ingredients: [
+        { qty: '400 g', name: 'Pulpe de pomme de terre' },
+        { qty: '180 g', name: 'Farine T50' },
+        { qty: '100 g', name: 'Farine de châtaigne' },
+        { qty: '3',     name: 'Jaunes d\'œuf' }
+      ],
+      steps: []
+    },
+    {
+      id: 'sorbet-navet',
+      name: 'Sorbet navet',
+      subtitle: 'Base — sorbet',
+      meta: [],
+      ingredients: [
+        { qty: '1400 g', name: 'Purée de navet cuit' },
+        { qty: '100 g',  name: 'Miel' },
+        { qty: '200 g',  name: 'Glucose' },
+        { qty: '200 g',  name: 'Trémoline' },
+        { qty: '60 g',   name: 'Jus de citron' },
+        { qty: '60 g',   name: 'Jus de yuzu' }
+      ],
+      steps: []
+    },
+    {
+      id: 'royale-legume',
+      name: 'Royale légume',
+      subtitle: 'Base — royale',
+      meta: [],
+      ingredients: [
+        { qty: '330 g', name: 'Purée de légume' },
+        { qty: '1',     name: 'Œuf entier' },
+        { qty: '2',     name: 'Jaunes d\'œuf' },
+        { qty: '100 g', name: 'Crème liquide' }
+      ],
+      steps: []
+    },
+    {
+      id: 'mousse-haddock',
+      name: 'Mousse haddock',
+      subtitle: 'Base — mousse',
+      meta: [],
+      ingredients: [
+        { qty: '350 g', name: 'Haddock fumé' },
+        { qty: '1 L',   name: 'Crème montée' },
+        { qty: 'PM',    name: 'Sel / poivron' },
+        { qty: '2 à 3', name: 'Feuilles de gélatine' }
+      ],
+      steps: []
+    },
+    {
+      id: 'chantilly-fg',
+      name: 'Chantilly de foie gras',
+      subtitle: 'Base — chantilly',
+      meta: [],
+      ingredients: [
+        { qty: '500 g', name: 'Foie gras cru' },
+        { qty: '500 g', name: 'Fond blanc' },
+        { qty: '1,6 g', name: 'Iota' }
+      ],
+      steps: [
+        "Cuire à <strong>70 °C</strong>.",
+        "Refroidir sur glace."
+      ],
+      notes: [
+        "Procédé incomplet sur la fiche source : l'étape de montage en chantilly (siphon ou fouet) n'est pas précisée. À compléter par François."
+      ]
+    },
+    {
+      id: 'siphon-pitacu',
+      name: 'Siphon Pitacu',
+      subtitle: 'Base — siphon',
+      meta: [],
+      ingredients: [
+        { qty: '3',     name: 'Jaunes d\'œuf' },
+        { qty: '50 g',  name: 'Eau' },
+        { qty: '50/50', name: 'Crème' },
+        { qty: '120 g', name: 'Pitacu' },
+        { qty: '1/2',   name: 'Citron jaune (jus)' }
+      ],
+      steps: []
+    },
+    {
+      id: 'beurre-de-yuzu',
+      name: 'Beurre de yuzu',
+      subtitle: 'Base — beurre',
+      meta: [],
+      ingredients: [
+        { qty: '100 g', name: 'Yuzu' },
+        { qty: '250 g', name: 'Eau' },
+        { qty: '1,5 g', name: 'Xantane' },
+        { qty: '300 g', name: 'Beurre' }
+      ],
+      steps: []
+    },
+    {
+      id: 'bonbon-pigeon',
+      name: 'Bonbon pigeon',
+      subtitle: 'Base — garniture',
+      meta: [],
+      ingredients: [
+        { qty: '100 g', name: 'Foie de pigeon ou blond' },
+        { qty: '100 g', name: 'Foie gras' },
+        { qty: '50 g',  name: 'Échalote confite' },
+        { qty: '50 g',  name: 'Farce fine' }
+      ],
+      steps: []
+    },
+    {
+      id: 'croute-wasabi',
+      name: 'Croûte wasabi',
+      subtitle: "Base — croûte d'herbes",
+      meta: [],
+      ingredients: [
+        { qty: '100 g', name: 'Chapelure japonaise' },
+        { qty: '50 g',  name: 'Wasabi' },
+        { qty: '1',     name: 'Botte de persil plat séché' }
+      ],
+      steps: []
+    },
+    {
+      id: 'siphon-homard',
+      name: 'Siphon Homard',
+      subtitle: 'Base — siphon',
+      meta: [],
+      ingredients: [
+        { qty: '3',    name: 'Jaunes d\'œuf' },
+        { qty: '1,5',  name: 'Jus de citron vert' },
+        { qty: '5 g',  name: 'Poudre de carotte' },
+        { qty: '50 g', name: 'Jus de carotte' },
+        { qty: 'PM',   name: 'Beurre de homard' }
+      ],
+      steps: [
+        "Peser le sabayon, puis ajouter le même poids en crème (50/50)."
+      ],
+      notes: [
+        "Procédé incomplet sur la fiche source : la cuisson du sabayon (température, méthode) n'est pas précisée. À compléter par François."
+      ]
     }
   ],
   entrees: [],
@@ -298,15 +465,158 @@ const RECIPES = {
         "Récupérer uniquement les langues orange.",
         "Puis cuire à hauteur avec 50/50 jus de cuisson et eau."
       ]
+    },
+    {
+      id: 'vinaigrette-miel-yuzu',
+      name: 'Vinaigrette Miel yuzu',
+      subtitle: 'Sauce — vinaigrette',
+      meta: [],
+      ingredients: [
+        { qty: '70 g', name: "Huile d'olive" },
+        { qty: '70 g', name: 'Huile de pépin de raisin' },
+        { qty: '40 g', name: 'Miel liquide' },
+        { qty: '75 g', name: 'Jus de yuzu' }
+      ],
+      steps: []
+    },
+    {
+      id: 'garniture-jus-10kg',
+      name: 'Garniture jus pour 10 kg',
+      subtitle: 'Sauce — garniture aromatique',
+      meta: [],
+      ingredients: [
+        { qty: '6',  name: 'Oignons', note: 'Veau' },
+        { qty: '4',  name: 'Carottes', note: 'Veau' },
+        { qty: '4',  name: 'Tomates', note: 'Veau' },
+        { qty: 'QS', name: 'Concentré de tomate', note: 'Veau' },
+        { qty: '4',  name: 'Carottes', note: 'Agneau' },
+        { qty: '6',  name: 'Oignons', note: 'Agneau' },
+        { qty: '2',  name: "Têtes d'ail", note: 'Agneau' },
+        { qty: '1',  name: 'Botte de thym', note: 'Agneau' },
+        { qty: '10', name: 'Échalotes', note: 'Bœuf — déglacer au porto' },
+        { qty: '6',  name: 'Oignons', note: 'Volaille' },
+        { qty: '4',  name: 'Carottes', note: 'Volaille' },
+        { qty: '6',  name: 'Carottes', note: 'Fond blanc' },
+        { qty: '2',  name: 'Poireaux', note: 'Fond blanc' },
+        { qty: '2',  name: 'Oignons piqués (clou de girofle brûlé)', note: 'Fond blanc' },
+        { qty: '2',  name: 'Oignons', note: 'Écrevisse' },
+        { qty: '1/2', name: 'Poireau', note: 'Écrevisse' },
+        { qty: '10', name: 'Tomates', note: 'Écrevisse' },
+        { qty: '5',  name: 'Champignons de Paris', note: 'Écrevisse' }
+      ],
+      steps: [],
+      notes: [
+        "Fond blanc : dégorger, porter à ébullition puis changer l'eau."
+      ]
+    },
+    {
+      id: 'sauce-supreme-verveine',
+      name: 'Sauce suprême verveine',
+      subtitle: 'Sauce',
+      meta: [],
+      ingredients: [
+        { qty: '100 g', name: 'Réduction de poule' },
+        { qty: '50 g',  name: 'Fond blanc' },
+        { qty: '30 g',  name: 'Verveine' },
+        { qty: '200 g', name: 'Crème épaisse' },
+        { qty: '30 g',  name: 'Foie gras' }
+      ],
+      steps: []
+    },
+    {
+      id: 'condiment-piment-espelette',
+      name: "Condiment piment d'Espelette",
+      subtitle: 'Sauce — condiment',
+      meta: [],
+      ingredients: [
+        { qty: '20 g', name: 'Persil' },
+        { qty: '20 g', name: 'Basilic' },
+        { qty: '60 g', name: "Pâte d'Espelette" },
+        { qty: '100 g', name: "Ail confit" },
+        { qty: '100 g', name: 'Olives hachées' }
+      ],
+      steps: []
+    },
+    {
+      id: 'coulis-encre-seiche',
+      name: "Coulis d'encre de seiche",
+      subtitle: 'Sauce — coulis',
+      meta: [],
+      ingredients: [
+        { qty: '3 c. à s.', name: 'Encre de seiche' },
+        { qty: '1 pochon',  name: 'Fond blanc' }
+      ],
+      steps: []
+    },
+    {
+      id: 'creme-epinard',
+      name: "Crème d'épinard",
+      subtitle: 'Sauce — crème',
+      meta: [],
+      ingredients: [
+        { qty: '250 g', name: "Épinard tombé à l'huile d'olive" },
+        { qty: '150 g', name: 'Eau' },
+        { qty: '100 g', name: 'Crème liquide' },
+        { qty: '0,5 g', name: 'Xantane' }
+      ],
+      steps: []
     }
   ],
   menus: []
 };
 
-const CAT_LABELS = { bases:'Bases', entrees:'Entrées', plats:'Plats', desserts:'Desserts', sauces:'Sauces', menus:'Menus' };
+const CAT_LABELS = { bases:'Bases', entrees:'Entrées', plats:'Plats', desserts:'Desserts', sauces:'Sauces', menus:'Menus', references:'Références' };
+
+const REFERENCES = {
+  cuisson_sous_vide: {
+    title: 'Températures et temps de cuisson sous vide',
+    rows: [
+      { item: 'Volaille de Bresse', em: 'Illisible sur la fiche source', ac: '—', temps: '4 h' },
+      { item: 'Noix de veau',       em: '60 °C', ac: '59 °C', temps: '—' },
+      { item: "Carré d'agneau",     em: '61 °C', ac: '56 °C', temps: '—' },
+      { item: 'Pigeon',             em: '56 °C', ac: '—', temps: '45 min' },
+      { item: 'Ris de veau',        em: 'Blanchi', ac: '—', temps: '5 min après ébullition' },
+      { item: 'Quasi de veau',      em: '59 °C', ac: '59 °C', temps: '—' },
+      { item: 'Canette',            em: '59 °C', ac: '56 °C', temps: '—' },
+      { item: 'Foie gras (FG)',     em: '68 °C', ac: '64 °C', temps: '—', note: 'Correction manuscrite sur la fiche source (valeur précédente barrée : 63 °C EM / 58 °C AC)' },
+      { item: 'Sole',               em: '63 °C', ac: '—', temps: '10 min' },
+      { item: 'Turbot',             em: '55 °C', ac: '—', temps: '20 min' },
+      { item: 'Homard',             em: '—', ac: '—', temps: '6 min + 1 min' },
+      { item: 'Ormeau',             em: '62 °C', ac: '—', temps: '4 h' }
+    ]
+  }
+};
+
 let currentCat = 'bases';
 
+function renderReferences() {
+  const ref = REFERENCES.cuisson_sous_vide;
+  const rows = ref.rows.map(r => `
+    <tr>
+      <td class="ref-item">${r.item}${r.note ? `<small>${r.note}</small>` : ''}</td>
+      <td>${r.em}</td>
+      <td>${r.ac}</td>
+      <td>${r.temps}</td>
+    </tr>`).join('');
+  document.getElementById('main').innerHTML = `
+    <div class="list-header">
+      <p class="list-eyebrow">Recueil Savin</p>
+      <div class="gold-rule"></div>
+      <h2 class="list-title">Références</h2>
+    </div>
+    <p class="ref-table-title">${ref.title}</p>
+    <div class="ref-table-wrap">
+      <table class="ref-table">
+        <thead>
+          <tr><th>Produit</th><th>EM</th><th>AC</th><th>Temps</th></tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
 function renderList(cat) {
+  if (cat === 'references') { renderReferences(); return; }
   const recipes = RECIPES[cat] || [];
   const main = document.getElementById('main');
   if (!recipes.length) {
@@ -335,7 +645,12 @@ function renderDetail(r) {
       <span class="qty">${i.qty}</span>
       <span class="ingr">${i.name}${i.note ? `<small>${i.note}</small>` : ''}</span>
     </div>`).join('');
-  const steps = r.steps.map(s => `<li class="step"><p>${s}</p></li>`).join('');
+  const steps = r.steps.length
+    ? r.steps.map(s => `<li class="step"><p>${s}</p></li>`).join('')
+    : '';
+  const stepsColHtml = r.steps.length
+    ? `<div class="steps-col"><p class="section-label">Procédé</p><ol class="steps-list">${steps}</ol></div>`
+    : `<div class="steps-col"><p class="section-label">Procédé</p><p class="steps-missing">Non renseigné sur la fiche source — à compléter par François.</p></div>`;
   const metaItems = r.meta.map(m => `
     <div class="meta-item">
       <span class="meta-label">${m.label}</span>
@@ -365,7 +680,7 @@ function renderDetail(r) {
       ${metaStripHtml}
       <div class="recipe-body">
         <div class="ingredients-col"><p class="section-label">Ingrédients</p>${ingRows}</div>
-        <div class="steps-col"><p class="section-label">Procédé</p><ol class="steps-list">${steps}</ol></div>
+        ${stepsColHtml}
       </div>
       ${notesHtml}
       <div class="sheet-footer">
