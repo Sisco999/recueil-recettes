@@ -128,7 +128,8 @@
 <nav class="cat-nav" id="cat-nav">
   <button class="cat-tab active" data-cat="bases">Bases</button>
   <button class="cat-tab" data-cat="entrees">Entrées</button>
-  <button class="cat-tab" data-cat="plats">Plats</button>
+  <button class="cat-tab" data-cat="plats_poisson">Poisson</button>
+  <button class="cat-tab" data-cat="plats_viande">Viande</button>
   <button class="cat-tab" data-cat="desserts">Desserts</button>
   <button class="cat-tab" data-cat="sauces">Sauces</button>
   <button class="cat-tab" data-cat="menus">Menus</button>
@@ -418,8 +419,7 @@ const RECIPES = {
       ]
     }
   ],
-  entrees: [],
-  plats: [
+  entrees: [
     {
       id: 'foie-gras-landes-tranche-epaisse-rotie',
       name: 'Foie gras des Landes, tranche épaisse rôtie',
@@ -444,11 +444,13 @@ const RECIPES = {
         "Poursuivre le refroidissement dans l'eau glacée pendant 20 minutes. Détailler en portions d'environ 120 g. Mettre sous vide individuellement et réserver au frais.",
         "Finition : remettre en température la portion dans une ambiance de <strong>40 °C</strong>. Retirer la poche sous vide puis colorer dans une poêle chaude, en l'arrosant de graisse. La température à cœur ne doit jamais dépasser 40 °C."
       ]
-    },
+    }
+  ],
+  plats_poisson: [
     {
       id: 'sole-en-croute-dherbe',
       name: "Sole en croûte d'herbe",
-      subtitle: 'Plat',
+      subtitle: 'Plat — poisson',
       meta: [
         { label: 'Portions', value: '2 filets / portion' },
         { label: 'Cuisson',  value: '63 °C, 10 min' },
@@ -475,6 +477,7 @@ const RECIPES = {
       ]
     }
   ],
+  plats_viande: [],
   desserts: [],
   sauces: [
     {
@@ -594,7 +597,7 @@ const RECIPES = {
   menus: []
 };
 
-const CAT_LABELS = { bases:'Bases', entrees:'Entrées', plats:'Plats', desserts:'Desserts', sauces:'Sauces', menus:'Menus', references:'Références' };
+const CAT_LABELS = { bases:'Bases', entrees:'Entrées', plats_poisson:'Poisson', plats_viande:'Viande', desserts:'Desserts', sauces:'Sauces', menus:'Menus', references:'Références' };
 
 const REFERENCES = {
   cuisson_sous_vide: {
