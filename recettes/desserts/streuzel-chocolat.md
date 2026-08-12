@@ -1,6 +1,6 @@
 # Streuzel Chocolat
 
-**Catégorie :** Base — streuzel  
+**Catégorie :** Dessert — streuzel  
 **Source :** Benoît Jabouille (transmis par WhatsApp)
 
 ---

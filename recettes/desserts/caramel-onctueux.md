@@ -1,6 +1,6 @@
 # Caramel Onctueux
 
-**Catégorie :** Base — caramel  
+**Catégorie :** Dessert — caramel  
 **Source :** Benoît Jabouille (transmis par WhatsApp)
 
 ---

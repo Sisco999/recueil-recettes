@@ -79,6 +79,22 @@
   .ingredient-row:first-child { padding-top: 0; }
   .ingredient-row:last-child { border-bottom: none; }
   .qty { font-size: 0.8125rem; color: var(--gold); font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+
+  .qty-scaler { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.875rem 0; margin-bottom: 1.75rem; border-bottom: 1px solid var(--divider); }
+  .qty-scaler-label { font-size: 0.6875rem; letter-spacing: 0.06em; color: var(--ink-mid); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .qty-scaler-controls { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .scale-btns { display: flex; gap: 0.375rem; }
+  .scale-btn { background: none; border: 1px solid var(--divider); padding: 0.3rem 0.625rem; font-family: inherit; font-size: 0.75rem; color: var(--ink-mid); cursor: pointer; font-variant-numeric: tabular-nums; }
+  .scale-btn:hover { border-color: var(--gold); color: var(--ink); }
+  .scale-btn.active { border-color: var(--gold); background: var(--gold); color: var(--navy); font-weight: 600; }
+  .scale-input { width: 72px; background: none; border: 1px solid var(--divider); padding: 0.3rem 0.5rem; font-family: inherit; font-size: 0.75rem; color: var(--ink); }
+  .scale-input:focus { outline: none; border-color: var(--gold); }
+  .scale-input::placeholder { color: var(--ink-mid); }
+  .qty-scaler-hint { width: 100%; font-size: 0.6875rem; font-style: italic; color: var(--ink-mid); margin-top: 0.5rem; }
+
+  @media (max-width: 600px) {
+    .qty-scaler { flex-direction: column; align-items: flex-start; }
+  }
   .ingr { font-size: 0.9375rem; color: var(--ink); line-height: 1.4; }
   .ingr small { display: block; font-size: 0.7rem; color: var(--ink-mid); font-style: italic; margin-top: 0.1rem; }
 
@@ -117,6 +133,9 @@
     .main { padding: 0; max-width: 100%; }
     .recipe-sheet { border: none; padding: 0; }
     .print-logo { display: flex !important; }
+    .scale-btns, .scale-input { display: none; }
+    .qty-scaler { border-bottom: 1px solid #ccc; }
+    .qty-scaler-hint { display: none; }
   }
 </style>
 
@@ -417,38 +436,6 @@ const RECIPES = {
       notes: [
         "Procédé incomplet sur la fiche source : la cuisson du sabayon (température, méthode) n'est pas précisée. À compléter par François."
       ]
-    },
-    {
-      id: 'caramel-onctueux',
-      name: 'Caramel Onctueux',
-      subtitle: 'Base — caramel',
-      meta: [],
-      ingredients: [
-        { qty: '500 g',  name: 'Sucre' },
-        { qty: '1000 g', name: 'Crème' }
-      ],
-      steps: [
-        "Caramel à sec, décuire avec la crème chaude, cuire à <strong>104 °C</strong>."
-      ]
-    },
-    {
-      id: 'streuzel-chocolat',
-      name: 'Streuzel Chocolat',
-      subtitle: 'Base — streuzel',
-      meta: [],
-      ingredients: [
-        { qty: '250 g', name: 'Beurre' },
-        { qty: '250 g', name: 'Cassonade' },
-        { qty: '4 g',   name: 'Sel fin' },
-        { qty: '220 g', name: 'Farine T45' },
-        { qty: '34 g',  name: 'Cacao en poudre' },
-        { qty: '250 g', name: "Poudre d'amande" }
-      ],
-      steps: [
-        "Sabler le beurre avec la cassonade, ajouter les poudres tamisées et la poudre d'amande.",
-        "Étaler à 0,8 (épaisseur) à la règle.",
-        "Détailler en petits cubes, cuire à <strong>145 °C</strong>, 12 min."
-      ]
     }
   ],
   entrees: [
@@ -535,6 +522,38 @@ const RECIPES = {
       notes: [
         "Timing de la gélatine confirmé par Benoît Jabouille (WhatsApp) : dans le lait et la crème chauds, avant de mélanger au chocolat.",
         "À faire la veille du service (indication de Benoît Jabouille)."
+      ]
+    },
+    {
+      id: 'caramel-onctueux',
+      name: 'Caramel Onctueux',
+      subtitle: 'Benoît Jabouille — transmis par WhatsApp',
+      meta: [],
+      ingredients: [
+        { qty: '500 g',  name: 'Sucre' },
+        { qty: '1000 g', name: 'Crème' }
+      ],
+      steps: [
+        "Caramel à sec, décuire avec la crème chaude, cuire à <strong>104 °C</strong>."
+      ]
+    },
+    {
+      id: 'streuzel-chocolat',
+      name: 'Streuzel Chocolat',
+      subtitle: 'Benoît Jabouille — transmis par WhatsApp',
+      meta: [],
+      ingredients: [
+        { qty: '250 g', name: 'Beurre' },
+        { qty: '250 g', name: 'Cassonade' },
+        { qty: '4 g',   name: 'Sel fin' },
+        { qty: '220 g', name: 'Farine T45' },
+        { qty: '34 g',  name: 'Cacao en poudre' },
+        { qty: '250 g', name: "Poudre d'amande" }
+      ],
+      steps: [
+        "Sabler le beurre avec la cassonade, ajouter les poudres tamisées et la poudre d'amande.",
+        "Étaler à 0,8 (épaisseur) à la règle.",
+        "Détailler en petits cubes, cuire à <strong>145 °C</strong>, 12 min."
       ]
     }
   ],
@@ -730,12 +749,31 @@ function renderList(cat) {
   });
 }
 
-function renderDetail(r) {
-  const ingRows = r.ingredients.map(i => `
+function scaleQty(qty, mult) {
+  if (mult === 1 || qty.includes('/')) return qty;
+  const m = qty.match(/^(\d+(?:[.,]\d+)?)(?:\s*(?:–|-|à)\s*(\d+(?:[.,]\d+)?))?/);
+  if (!m) return qty;
+  const rest = qty.slice(m[0].length);
+  const parseFr = s => parseFloat(s.replace(',', '.'));
+  const fmtFr = n => (Math.round(n * 100) / 100).toString().replace('.', ',');
+  const n1 = fmtFr(parseFr(m[1]) * mult);
+  if (m[2]) {
+    const n2 = fmtFr(parseFr(m[2]) * mult);
+    return `${n1}–${n2}${rest}`;
+  }
+  return `${n1}${rest}`;
+}
+
+function renderIngredients(r, mult) {
+  return r.ingredients.map(i => `
     <div class="ingredient-row">
-      <span class="qty">${i.qty}</span>
+      <span class="qty">${scaleQty(i.qty, mult)}</span>
       <span class="ingr">${i.name}${i.note ? `<small>${i.note}</small>` : ''}</span>
     </div>`).join('');
+}
+
+function renderDetail(r) {
+  const ingRows = renderIngredients(r, 1);
   const steps = r.steps.length
     ? r.steps.map(s => `<li class="step"><p>${s}</p></li>`).join('')
     : '';
@@ -769,8 +807,22 @@ function renderDetail(r) {
         <p class="sheet-subtitle">${r.subtitle}</p>
       </div>
       ${metaStripHtml}
+      <div class="qty-scaler">
+        <span class="qty-scaler-label" id="qty-scaler-label">Ingrédients — quantités ×1</span>
+        <div class="qty-scaler-controls">
+          <div class="scale-btns">
+            <button class="scale-btn" data-mult="0.5">×0,5</button>
+            <button class="scale-btn active" data-mult="1">×1</button>
+            <button class="scale-btn" data-mult="2">×2</button>
+            <button class="scale-btn" data-mult="3">×3</button>
+            <button class="scale-btn" data-mult="4">×4</button>
+          </div>
+          <input type="number" class="scale-input" id="scale-input" min="0.1" step="0.5" placeholder="Autre ×" />
+        </div>
+        <p class="qty-scaler-hint">PM, QS et proportions (ex. 50/50) ne sont pas recalculés — à ajuster au jugé.</p>
+      </div>
       <div class="recipe-body">
-        <div class="ingredients-col"><p class="section-label">Ingrédients</p>${ingRows}</div>
+        <div class="ingredients-col"><p class="section-label">Ingrédients</p><div id="ing-rows">${ingRows}</div></div>
         ${stepsColHtml}
       </div>
       ${notesHtml}
@@ -781,6 +833,29 @@ function renderDetail(r) {
       </div>
     </div>`;
   document.getElementById('btn-back').addEventListener('click', () => renderList(currentCat));
+
+  function applyMultiplier(mult) {
+    document.getElementById('ing-rows').innerHTML = renderIngredients(r, mult);
+    const label = mult.toString().replace('.', ',');
+    document.getElementById('qty-scaler-label').textContent = `Ingrédients — quantités ×${label}`;
+  }
+
+  document.querySelectorAll('.scale-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('scale-input').value = '';
+      applyMultiplier(parseFloat(btn.dataset.mult));
+    });
+  });
+
+  document.getElementById('scale-input').addEventListener('input', e => {
+    const val = parseFloat(e.target.value.replace(',', '.'));
+    if (!isNaN(val) && val > 0) {
+      document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+      applyMultiplier(val);
+    }
+  });
 }
 
 document.getElementById('cat-nav').addEventListener('click', e => {
