@@ -23,8 +23,4 @@
 
 ## Procédé
 
-1. Fouetter dans un bol l'huile d'olive, la moitié du vinaigre (15 ml), l'ail, le sel, l'origan, le piment en flocons et le paprika fumé.
-2. Incorporer le persil.
-3. Rectifier l'assaisonnement, ajouter le reste du vinaigre (15 ml) si besoin d'une saveur plus vive.
-
-**Alternative :** au mortier ou au robot-coupe, quelques pulsions seulement — ne pas mixer en purée.
+1. Mélanger tous les ingrédients.
